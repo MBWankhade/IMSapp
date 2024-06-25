@@ -1,5 +1,6 @@
 import AudioVideoScreen from "./components/AudioVideoScreen"
 import CodeEditor from "./components/CodeEditor"
+import Login from "./components/Login"
 import Notepad from "./components/Notepad"
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <>
       {/* <Notepad/>
       <CodeEditor/> */}
-      <AudioVideoScreen/>
+      {/* <AudioVideoScreen/> */}
+      <Login/>
     </>
   )
 }
