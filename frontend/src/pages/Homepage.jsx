@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaSquareXTwitter } from "react-icons/fa6";;
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
+import PopupModal from '../components/PopupModal';
 
 function Homepage() {
     const { status, setStatus, peerId, roomId, setRoomId, setUser, user } = useContext(DataContext);
@@ -34,7 +35,21 @@ function Homepage() {
 
     return (
       <>
-        <div>Navbar</div>
+        <div className='flex p-4 bg-blue-400 justify-between items-center shadow-xl'>
+          <div className='text-4xl font-bold text-white'>Logo</div>
+          <div className='flex w-3/12 justify-around items-center'>
+            <p className='text-2xl font-semibold text-white'>Home</p>
+            <p className='text-2xl font-semibold text-white'>Features</p>
+            {user ? (
+              <button onClick={handleLogout} className='text-xl font-semibold text-white bg-blue-700 rounded-xl shadow-xl py-2 px-4'>Logout</button>
+            ) : (
+              <div>
+                <button className='text-xl font-semibold text-white bg-blue-700 rounded-xl shadow-xl py-2 px-4'>Login</button>
+                <button className='text-xl font-semibold text-blue-700 bg-white rounded-xl shadow-xl py-2 px-4'>Signup</button>
+              </div>
+            )}
+          </div>
+        </div>
         <div className="flex h-full w-full p-24 justify-around shadow-xl">
           <div className="w-1/2 flex flex-col justify-center gap-4">
             <p className="text-7xl font-bold">
@@ -48,9 +63,7 @@ function Homepage() {
                 <button className="bg-blue-400 font-semibold text-lg text-white px-4 py-1 rounded-md shadow-md">
                   Start an Interview
                 </button>
-                <button className="font-semibold text-lg  px-4 py-1 rounded-md border border-gray-300 shadow-md">
-                  Join an Interview
-                </button>
+                <PopupModal/>
               </div>
             ) : (
               <div className="flex gap-8">
@@ -180,10 +193,7 @@ function Homepage() {
                   >
                     <FaLinkedin />
                   </a>
-                  <a
-                    href="https://x.com/khawse_man69128"
-                    className="text-3xl"
-                  >
+                  <a href="https://x.com/khawse_man69128" className="text-3xl">
                     <FaSquareXTwitter />
                   </a>
                   <a
