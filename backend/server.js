@@ -51,7 +51,7 @@ app.post("/api/login", async (req, res) => {
           id: user._id,
         }, process.env.JWT_SECRET);
         res.cookie("token", token);
-        return res.status(200).send("login success");
+        return res.status(200).send({message:"login success", data: token});
       } else {
         return res.status(401).send("password incorrect");
       }
@@ -87,11 +87,16 @@ app.post("/api/register", async (req, res) => {
       id: user._id,
     }, process.env.JWT_SECRET);
     res.cookie("token", token);
-    return res.status(201).send("user registered successfully");
+    return res.status(201).send({message:"user registered successfully", data: token});
   } catch (error) {
     console.log(error);
     return res.status(500).send("internal server error");
   }
+});
+
+app.post('/api/logout', (req, res) => {
+  res.clearCookie('token');
+  res.json({ message: 'Logout successful' });
 });
 
 
