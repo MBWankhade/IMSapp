@@ -22,6 +22,8 @@ export const DataProvider = ({children}) => {
       peer.on('open', (id) => {
         setPeerId(id);
       });
+  
+      peerInstance.current = peer;
       
     }, [])
     

@@ -13,7 +13,7 @@ const LanguageDropdown = ({ langSetter, verSetter , socket, lang, ver}) => {
 
   return (
     <div>
-      <select className='p-2 font-size' value={lang} onChange={handleChange}>
+      <select className='p-1 text-lg outline-none bg-blue-500 rounded-md text-white' value={lang} onChange={handleChange}>
         {
           languages.map((lang) => (
             <option key={lang.name} value={lang.name} className='bg-blue-900'>

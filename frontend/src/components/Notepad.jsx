@@ -43,9 +43,7 @@ const socket = useMemo(
 
   return (
     <>
-        <div>
-            <ReactQuill theme="snow" value={value} onChange={handleChange}  className='w-1/2 h-96 mx-auto'/>
-        </div>
+      <ReactQuill theme="snow" value={value} onChange={handleChange} className='w-10/12 h-5/6 px-4 text-white'/>
     </>
   )
 }
