@@ -7,6 +7,7 @@ import Notepad from "./components/Notepad";
 import Homepage from "./pages/Homepage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DataContext } from "./context/DataProvider";
+import MainPage from "./pages/MainPage";
 
 function App() {
   const { user } = useContext(DataContext);
@@ -28,7 +29,7 @@ function App() {
         />
         <Route
           path="/room"
-          element={user ? <AudioVideoScreen /> : <Navigate to="/login" />}
+          element={user ? <MainPage /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>

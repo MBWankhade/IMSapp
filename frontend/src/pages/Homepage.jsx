@@ -6,16 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import { FaSquareXTwitter } from "react-icons/fa6";;
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
+import InputModal from '../components/InputModal';
 import PopupModal from '../components/PopupModal';
 
 function Homepage() {
-    const { status, setStatus, peerId, roomId, setRoomId, setUser, user } = useContext(DataContext);
+    const { setUser, user } = useContext(DataContext);
 
     const navigate = useNavigate();
-    const createRoom = () => {  
-        setRoomId(peerId);
-        setStatus("interviewer");
-    }
+
 
     const handleLogout = async () => {
         try {
@@ -60,10 +58,8 @@ function Homepage() {
             </p>
             {user ? (
               <div className="flex gap-8">
-                <button className="bg-blue-400 font-semibold text-lg text-white px-4 py-1 rounded-md shadow-md">
-                  Start an Interview
-                </button>
                 <PopupModal/>
+                <InputModal/>
               </div>
             ) : (
               <div className="flex gap-8">
