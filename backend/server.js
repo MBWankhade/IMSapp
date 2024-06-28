@@ -101,38 +101,48 @@ app.post('/api/logout', (req, res) => {
 
 
 io.on("connection", (socket) => {
-    console.log("user connected");
-    console.log("user id :", socket.id);
+    // console.log("user connected");
+    // console.log("user id :", socket.id);
 
-    socket.on("message", (data) => {
-        console.log(data);
-        io.emit("recieve-message", data);
+    socket.on('joinRoom', (room) => {
+      socket.join(room);
+      // console.log(`User ${socket.id} joined room ${room}`);
+    });
+
+    socket.on('leaveRoom', (room) => {
+      socket.leave(room);
+      // console.log(`User ${socket.id} left room ${room}`);
+    });
+
+    socket.on("message", ({room, data}) => {
+        // console.log(data);
+        io.to(room).emit("recieve-message", data);
     })
 
-    socket.on("display-code", (data) => {
+    socket.on("display-code", ({room,data}) => {
         console.log(data);
-        io.emit("recieve-code", data);
+        io.to(room).emit("recieve-code", data);
     })
 
-    socket.on("input-change", (data) => {
+    socket.on("input-change", ({room,data}) => {
         console.log(data);
-        io.emit("recieve-input", data);
+        io.to(room).emit("recieve-input", data);
     })
 
-    socket.on("output-change", (data) => {
+    socket.on("output-change", ({room, data}) => {
         console.log(data);
-        io.emit("recieve-output", data);
+        io.to(room).emit("recieve-output", data);
     })
 
-    socket.on("change-language", (data) => {
+    socket.on("change-language", ({room, data}) => {
         console.log(data);
-        io.emit("recieve-language", data);
+        io.to(room).emit("recieve-language", data);
     })
 
-    socket.on("text-change", (data) => {
-        console.log(data);
-        io.emit("recieve-text", data);
-    })  
+    socket.on("text-change", ({ room, data }) => {
+      console.log(data);
+      io.to(room).emit("recieve-text", data);
+    });
 
 })
 

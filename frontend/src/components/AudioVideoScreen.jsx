@@ -5,11 +5,17 @@ import Notepad from './Notepad';
 import CodeEditor from './CodeEditor';
 
 function AudioVideoScreen() {
-  const { roomId, peerInstance, status } = useContext(DataContext);
+  const { roomId, peerInstance, status, socket} = useContext(DataContext);
   const remoteVideoRef = useRef(null);
   const currentUserVideoRef = useRef(null);
 
   useEffect(() => {
+
+    socket.on("connect", () => {
+      console.log("connected", socket.id);
+    });
+
+    socket.emit("joinRoom", roomId);
     const getUserMedia = navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
     if (!peerInstance.current) {
@@ -73,13 +79,13 @@ function AudioVideoScreen() {
       <div className='w-4/12 '>
         <video ref={currentUserVideoRef} autoPlay playsInline className='rounded-xl shadow-xl'  />
       </div>
-      <Notepad />
+      <Notepad socket={socket} roomId = {roomId}/>
       <div className='w-4/12 '>
         <video ref={remoteVideoRef} autoPlay playsInline className='rounded-xl shadow-xl'  />
       </div>
     </div>
     <div>
-      <CodeEditor />
+      <CodeEditor socket={socket} roomId = {roomId}/>
     </div>
     </>
   );

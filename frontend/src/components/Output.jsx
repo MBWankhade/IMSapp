@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function Output({language, version, value, socket}) {
+function Output({language, version, value, socket, roomId}) {
 
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
@@ -28,7 +28,7 @@ function Output({language, version, value, socket}) {
       const data = await res.json();
       console.log(data)
       setOutput(data.run.stdout + '\n'+ data.run.stderr);
-      socket.emit("output-change", data.run.stdout + '\n'+ data.run.stderr);
+      socket.emit("output-change", {room: roomId, data: data.run.stdout + '\n'+ data.run.stderr});
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ function Output({language, version, value, socket}) {
   function handleChange(event) {
     const newValue = event.target.value;
     setInput(newValue);
-    socket.emit("input-change", newValue);
+    socket.emit("input-change", {room: roomId, data: newValue});
   }
 
   useEffect(() => {

@@ -2,6 +2,8 @@ import React from 'react';
 import { useContext } from 'react';
 import { DataContext } from '../context/DataProvider';
 import heroGif from '../assets/job-interview.gif';
+import textEditorImg from '../assets/Text Editor.png';
+import codeEditorImg from '../assets/code editor.png';
 import { useNavigate } from 'react-router-dom'
 import { FaSquareXTwitter } from "react-icons/fa6";;
 import { FaLinkedin } from "react-icons/fa";
@@ -99,25 +101,13 @@ function Homepage() {
             />
           </div>
 
-          <div className="flex flex-row-reverse items-center justify-between p-12">
-            <p className="text-3xl w-1/2 text-end">
-              <strong>Screen Sharing: </strong>Share your screen to discuss
-              problems and solutions effectively.
-            </p>
-            <img
-              src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*NLSe2SyjfxdbEqFsOWHhlg.png"
-              className="w-4/12 rounded-md shadow-xl"
-              alt=""
-            />
-          </div>
-
           <div className="flex items-center justify-between p-12">
             <p className="text-3xl w-1/2">
               <strong>Collaborative Code Editor: </strong>Code together in
               real-time with syntax highlighting and autocompletion.
             </p>
             <img
-              src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*NLSe2SyjfxdbEqFsOWHhlg.png"
+              src={codeEditorImg}
               className="w-4/12 rounded-md shadow-xl"
               alt=""
             />
@@ -129,7 +119,7 @@ function Homepage() {
               with our integrated text editor.
             </p>
             <img
-              src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*NLSe2SyjfxdbEqFsOWHhlg.png"
+              src={textEditorImg}
               className="w-4/12 rounded-md shadow-xl"
               alt=""
             />

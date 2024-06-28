@@ -1,17 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 import { io } from "socket.io-client";
 import LanguageDropdown from "./LanguageDropdown";
 import Output from "./Output";
 
-function CodeEditor() {
-  const socket = useMemo(
-    () =>
-      io("http://localhost:3000", {
-        withCredentials: true,
-      }),
-    []
-  );
+
+function CodeEditor({socket, roomId}) {
+  
 
   const [value, setValue] = useState("");
   const [socketId, setSocketId] = useState("");
@@ -27,14 +22,14 @@ function CodeEditor() {
 
   function handleEditorChange(value, event) {
     setValue(value);
-    socket.emit("message", value);
+    socket.emit("message", { room: roomId, data: value });
   }
 
   useEffect(() => {
-    socket.on("connect", () => {
-      setSocketId(socket.id);
-      console.log("connected", socket.id);
-    });
+    // socket.on("connect", () => {
+    //   setSocketId(socket.id);
+    //   console.log("connected", socket.id);
+    // });
 
     socket.on("recieve-message", (data) => {
       console.log(data);
@@ -67,6 +62,7 @@ function CodeEditor() {
               socket={socket}
               lang={language}
               ver={version}
+              roomId={roomId}
             />
           </div>
           <Editor
@@ -85,6 +81,7 @@ function CodeEditor() {
           language={language}
           value={value}
           socket={socket}
+          roomId={roomId}
         />
       </div>
     </>
