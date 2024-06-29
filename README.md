@@ -1,7 +1,3 @@
-Here's a README for your MockInt project:
-
----
-
 # MockInt
 
 MockInt is a mock interview platform designed to enhance interview preparation through real-time collaboration and communication. Built with the MERN stack, socket.io, and peerjs, MockInt offers a seamless and interactive interview experience.
