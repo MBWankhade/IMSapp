@@ -1,45 +1,58 @@
-import Peer from 'peerjs';
-import React, { useState, createContext, useEffect, useRef, useMemo } from 'react';
-import { io } from 'socket.io-client';
-
+import Peer from "peerjs";
+import React, {
+  useState,
+  createContext,
+  useEffect,
+  useRef,
+} from "react";
+import { io } from "socket.io-client";
 
 export const DataContext = createContext();
 
-export const DataProvider = ({children}) => {
-    const [user, setUser] = useState(null);
-    const [socket, setSocket] = useState(null);
-    const [status, setStatus] = useState("");
-    const [roomId, setRoomId] = useState("");
-    const [peerId, setPeerId] = useState('');
-    const peerInstance = useRef(null);
+export const DataProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [socket, setSocket] = useState(null);
+  const [status, setStatus] = useState("");
+  const [roomId, setRoomId] = useState("");
+  const [peerId, setPeerId] = useState("");
+  const peerInstance = useRef(null);
 
-    useEffect(() => {
+  useEffect(() => {
+    const socket = io("http://localhost:3000", {
+      withCredentials: true,
+    });
 
-      const socket = io("http://localhost:3000", {
-            withCredentials: true,
-          });
+    setSocket(socket);
 
-      setSocket(socket);
+    const storedUser = localStorage.getItem("token");
+    if (storedUser) {
+      setUser(storedUser);
+    }
 
-      const storedUser = localStorage.getItem('token');
-        if (storedUser) {
-            setUser(storedUser);
-        }
+    const peer = new Peer();
 
-      const peer = new Peer();
+    peer.on("open", (id) => {
+      setPeerId(id);
+    });
 
-      peer.on('open', (id) => {
-        setPeerId(id);
-      });
-  
-      peerInstance.current = peer;
-      
-    }, [])
-    
+    peerInstance.current = peer;
+  }, []);
 
-    return (
-        <DataContext.Provider value={{user, setUser, status, setStatus, roomId, setRoomId, peerInstance, peerId, socket}}>
-            {children}
-        </DataContext.Provider>
-    );
-}
+  return (
+    <DataContext.Provider
+      value={{
+        user,
+        setUser,
+        status,
+        setStatus,
+        roomId,
+        setRoomId,
+        peerInstance,
+        peerId,
+        socket,
+      }}
+    >
+      {children}
+    </DataContext.Provider>
+  );
+};

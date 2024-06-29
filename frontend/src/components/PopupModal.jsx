@@ -1,15 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { DataContext } from '../context/DataProvider';
+import React, { useContext, useState, useEffect } from "react";
+import { DataContext } from "../context/DataProvider";
 import { FaCopy } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function PopupModal() {
-  const {setStatus, peerId, roomId, setRoomId} = useContext(DataContext);
+  const { setStatus, peerId, roomId, setRoomId } = useContext(DataContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  // Update roomId when peerId changes
   useEffect(() => {
     if (isOpen && peerId) {
       setRoomId(peerId);
@@ -24,17 +23,18 @@ function PopupModal() {
   const closeModal = () => setIsOpen(false);
   const closeModalAndJoin = () => {
     setIsOpen(false);
-    navigate('/room');
+    navigate("/room");
   };
 
   return (
     <div>
-      {/* Trigger Button */}
-      <button className="bg-blue-400 font-semibold text-lg text-white px-4 py-1 rounded-md shadow-md" onClick={openModal}>
+      <button
+        className="bg-blue-400 font-semibold text-lg text-white px-4 py-1 rounded-md shadow-md"
+        onClick={openModal}
+      >
         Start an Interview
       </button>
 
-      {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
@@ -48,17 +48,27 @@ function PopupModal() {
               </button>
             </div>
             <div className="mb-4 flex items-center justify-between">
-              <p className='text-2xl font-semibold text-gray-500'>{roomId.length? roomId: "Loading...."}</p>
-              <FaCopy className='text-2xl text-gray-500 hover:text-gray-800 transition-all' onClick={() => {navigator.clipboard.writeText(roomId)}}/>
+              <p className="text-2xl font-semibold text-gray-500">
+                {roomId.length ? roomId : "Loading...."}
+              </p>
+              <FaCopy
+                className="text-2xl text-gray-500 hover:text-gray-800 transition-all"
+                onClick={() => {
+                  navigator.clipboard.writeText(roomId);
+                }}
+              />
             </div>
             <div className="flex justify-end">
               <button
-                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                className="bg-gray-500 text-white font-semibold px-4 py-2 rounded-md shadow-xl mr-2"
                 onClick={closeModal}
               >
                 Close
               </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={closeModalAndJoin}>
+              <button
+                className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-md shadow-xl"
+                onClick={closeModalAndJoin}
+              >
                 Start Interview
               </button>
             </div>

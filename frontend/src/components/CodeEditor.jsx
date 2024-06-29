@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
-import { io } from "socket.io-client";
 import LanguageDropdown from "./LanguageDropdown";
 import Output from "./Output";
 
-
-function CodeEditor({socket, roomId}) {
-  
-
+function CodeEditor({ socket, roomId }) {
   const [value, setValue] = useState("");
-  const [socketId, setSocketId] = useState("");
   const [language, setLanguage] = useState("c");
   const [version, setVersion] = useState("10.2.0");
 
@@ -26,13 +21,7 @@ function CodeEditor({socket, roomId}) {
   }
 
   useEffect(() => {
-    // socket.on("connect", () => {
-    //   setSocketId(socket.id);
-    //   console.log("connected", socket.id);
-    // });
-
     socket.on("recieve-message", (data) => {
-      console.log(data);
       setValue(data);
     });
 

@@ -1,9 +1,6 @@
 import { useContext } from "react";
-import AudioVideoScreen from "./components/AudioVideoScreen";
-import CodeEditor from "./components/CodeEditor";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Notepad from "./components/Notepad";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Homepage from "./pages/Homepage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DataContext } from "./context/DataProvider";

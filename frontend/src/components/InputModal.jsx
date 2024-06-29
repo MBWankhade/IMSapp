@@ -1,30 +1,30 @@
-import React, { useContext, useState } from 'react';
-import { DataContext } from '../context/DataProvider';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { DataContext } from "../context/DataProvider";
+import { useNavigate } from "react-router-dom";
 
 function InputModal() {
-
-  const { setStatus, setRoomId} = useContext(DataContext);
+  const { setStatus, setRoomId } = useContext(DataContext);
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const openModal = () => setIsOpen(true);
-  const closeModal = ()=> setIsOpen(false);
+  const closeModal = () => setIsOpen(false);
   const closeModalAndJoin = () => {
     setStatus("interviewee");
     setIsOpen(false);
-    navigate('/room');
+    navigate("/room");
   };
 
   return (
     <div>
-      {/* Trigger Button */}
-      <button className="font-semibold text-lg  px-4 py-1 rounded-md border border-gray-300 shadow-md" onClick={openModal}>
+      <button
+        className="font-semibold text-lg  px-4 py-1 rounded-md border border-gray-300 shadow-md"
+        onClick={openModal}
+      >
         Join an Interview
       </button>
 
-      {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
@@ -38,11 +38,19 @@ function InputModal() {
               </button>
             </div>
             <div className="mb-4">
-              <input type="text" className='border border-gray-400 px-4 py-2 w-full rounded-xl outline-none text-semibold' placeholder='Room ID' onChange={(e)=>setRoomId(e.target.value)}/>
+              <input
+                type="text"
+                className="border border-gray-400 px-4 py-2 w-full rounded-xl outline-none text-semibold"
+                placeholder="Room ID"
+                onChange={(e) => setRoomId(e.target.value)}
+              />
             </div>
             <div className="flex justify-end">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={closeModalAndJoin}>
-                Save Changes
+              <button
+                className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-md shadow-xl"
+                onClick={closeModalAndJoin}
+              >
+                Join
               </button>
             </div>
           </div>
