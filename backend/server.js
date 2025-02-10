@@ -26,7 +26,7 @@ connectdb();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://imsapp-palx.onrender.com",
     methods: ["GET", "POST"],
     credentials: true,
   })
