@@ -11,28 +11,40 @@ const port = 3000;
 
 const app = express();
 const server = createServer(app);
+
+// Initialize Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "https://im-sapp.vercel.app",
+    // Allow the desired origins (adjust this as per your need)
+    origin: "https://im-sapp.vercel.app",  // Replace with the frontend URL(s)
     methods: ["GET", "POST"],
-    credentials: false,
+    credentials: true,  // Allow credentials like cookies
   },
 });
 
 dotenv.config();
+
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-connectdb();
 app.use(cookieParser());
+
+// Database connection
+connectdb();
+
+// CORS middleware for Express
 app.use(
   cors({
-    origin: "https://imsapp-palx.onrender.com",
+    origin: "https://imsapp-palx.onrender.com",  // Adjust this as per your need
     methods: ["GET", "POST"],
-    credentials: true,
+    credentials: true,  // Allow credentials like cookies
   })
 );
+
+// Routes
 app.use("/api", auth);
 
+// Socket.io connection
 io.on("connection", (socket) => {
   console.log(`User ${socket.id} connected`);
 
@@ -71,10 +83,12 @@ io.on("connection", (socket) => {
   });
 });
 
+// Default route
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// Start the server
 server.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
 });
