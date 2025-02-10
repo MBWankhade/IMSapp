@@ -12,7 +12,7 @@ function Signup() {
   const navigate = useNavigate();
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/register", {
+      const res = await fetch("https://imsapp-4lhx.onrender.com/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

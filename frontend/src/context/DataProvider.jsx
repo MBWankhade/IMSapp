@@ -18,7 +18,7 @@ export const DataProvider = ({ children }) => {
   const peerInstance = useRef(null);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000", {
+    const socket = io("https://imsapp-4lhx.onrender.com/", {
       withCredentials: true,
     });
 

@@ -18,7 +18,7 @@ function Homepage() {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/logout", {
+      const res = await fetch("https://imsapp-4lhx.onrender.com/api/logout", {
         method: "POST",
         credentials: "include",
       });
