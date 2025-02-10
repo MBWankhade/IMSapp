@@ -13,7 +13,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://imsapp-palx.onrender.com",
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
   },
