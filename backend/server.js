@@ -13,7 +13,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://im-sapp.vercel.app/",
     methods: ["GET", "POST"],
     credentials: false,
   },
